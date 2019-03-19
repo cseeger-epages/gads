@@ -5,7 +5,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"github.com/emiddleton/gads"
+	"github.com/sakari-ai/gads"
 	"github.com/toqueteos/webbrowser"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
@@ -50,10 +50,10 @@ func main() {
 	ac := gads.AuthConfig{
 		OAuth2Config: conf,
 		OAuth2Token:  tok,
-		Auth: gads.Auth{
-			CustomerId:     "INSERT_YOUR_CLIENT_CUSTOMER_ID_HERE",
-			DeveloperToken: "INSERT_YOUR_DEVELOPER_TOKEN_HERE",
-			UserAgent:      "tests (Golang 1.4 github.com/emiddleton/gads)",
+		Auth: &gads.Auth{
+			CustomerId:     "623-203-4777",
+			DeveloperToken: "0QsnkPf33JfxN5SGDRr8SQ",
+			UserAgent:      "Sakari-Apollo",
 		},
 	}
 	configData, err := json.MarshalIndent(&ac, "", "    ")
