@@ -8,15 +8,17 @@ import (
 	"golang.org/x/oauth2"
 )
 
+// AuthConfig .
 type AuthConfig struct {
 	file        string             `json:"-"`
-	Config      *oauth2.Config     `json:"Config"`
-	OAuth2Token *oauth2.Token      `json:"OAuth2Token"`
+	Config      *oauth2.Config     `json:"oauth2.Config"`
+	OAuth2Token *oauth2.Token      `json:"oauth2.Token"`
 	tokenSource oauth2.TokenSource `json:"-"`
-	Auth        *Auth              `json:"Auth"`
+	Auth        *Auth              `json:"gads.Auth"`
 }
 
-func NewCredentialsFromFile(pathToFile string, ctx context.Context) (ac AuthConfig, err error) {
+// NewCredentialsFromFile .
+func NewCredentialsFromFile(ctx context.Context, pathToFile string) (ac AuthConfig, err error) {
 	data, err := ioutil.ReadFile(pathToFile)
 	if err != nil {
 		return ac, err
@@ -30,13 +32,15 @@ func NewCredentialsFromFile(pathToFile string, ctx context.Context) (ac AuthConf
 	return ac, err
 }
 
-func NewCredentialFromConfig(ctx context.Context, ac *AuthConfig) {
+// NewCredentialsFromConfig .
+func NewCredentialsFromConfig(ctx context.Context, ac *AuthConfig) {
 	ac.tokenSource = ac.Config.TokenSource(ctx, ac.OAuth2Token)
 	ac.Auth.Client = ac.Config.Client(ctx, ac.OAuth2Token)
 }
 
+// NewCredentials .
 func NewCredentials(ctx context.Context) (ac AuthConfig, err error) {
-	return NewCredentialsFromFile(*configJson, ctx)
+	return NewCredentialsFromFile(ctx, *configJson)
 }
 
 // Save writes the contents of AuthConfig back to the JSON file it was

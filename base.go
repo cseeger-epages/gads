@@ -77,9 +77,9 @@ func (s ServiceUrl) String() string {
 }
 
 type Auth struct {
-	CustomerId     string
-	DeveloperToken string
-	UserAgent      string
+	CustomerId     string       `json:"CustomerId"`
+	DeveloperToken string       `json:"DeveloperToken"`
+	UserAgent      string       `json:"UserAgent"`
 	Testing        *testing.T   `json:"-"`
 	Client         *http.Client `json:"-"`
 }
